@@ -10,5 +10,5 @@ The plugin is developed for the browser environment. The "fake" browser behind t
 
    Example configurations:
 
-   - [Amazon S3](./s3_cors_configure.md)
-   - [Apache](./apache_cors_configure.md) ([contributed by community](https://github.com/remotely-save/remotely-save/pull/31))
+   - [Amazon S3](./remote_services/s3_general/s3_cors_configure.md)
+   - [Apache](./remote_services/webdav_general/webdav_apache_cors.md) ([contributed by community](https://github.com/remotely-save/remotely-save/pull/31))

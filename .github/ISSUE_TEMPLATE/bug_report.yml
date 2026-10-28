@@ -45,6 +45,7 @@ body:
         - OneDrive for personal
         - OneDrive for business
         - Dropbox
+        - Webdis
         - webdav       
         - webdav (ownCloud)
         - webdav (InfiniCloud (formally TeraCLOUD))

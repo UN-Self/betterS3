@@ -1,11 +1,10 @@
 {
-  "id": "remotely-save",
-  "name": "Remotely Save",
-  "version": "0.5.25",
+  "id": "betters3",
+  "name": "betterS3",
+  "version": "0.6.0",
   "minAppVersion": "0.13.21",
-  "description": "Yet another unofficial plugin allowing users to synchronize notes between local device and the cloud service.",
-  "author": "fyears",
-  "authorUrl": "https://github.com/fyears",
-  "isDesktopOnly": false,
-  "fundingUrl": "https://remotelysave.com"
+  "description": "Sync your vault to S3-compatible storage (and WebDAV, Dropbox, OneDrive, Webdis). Unofficial fork of Remotely Save with all features free.",
+  "author": "UN-Self",
+  "authorUrl": "https://github.com/UN-Self",
+  "isDesktopOnly": false
 }

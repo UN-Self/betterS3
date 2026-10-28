@@ -2,7 +2,7 @@
 
 - [x] sync conflict: keep newer
 - [x] sync conflict: keep larger
-- [ ] sync conflict: keep both and rename
+- [x] sync conflict: keep both and rename (smart conflict, free)
 - [ ] sync conflict: show warning
 - [x] deletion: true deletion status computation
 - [x] meta data: no remote meta data any more

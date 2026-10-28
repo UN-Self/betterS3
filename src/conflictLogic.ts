@@ -14,10 +14,9 @@ import {
   mergeDigIn,
   patch,
 } from "node-diff3";
-import type { Entity } from "../../src/baseTypes";
-import { copyFile } from "../../src/copyLogic";
-import type { FakeFs } from "../../src/fsAll";
-import { MERGABLE_SIZE } from "./baseTypesPro";
+import { type Entity, MERGABLE_SIZE } from "./baseTypes";
+import { copyFile } from "./copyLogic";
+import type { FakeFs } from "./fsAll";
 
 export function isMergable(a: Entity, b?: Entity) {
   if (b !== undefined && a.key !== b.key) {

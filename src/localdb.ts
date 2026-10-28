@@ -6,9 +6,9 @@ ep2(localforage);
 export type LocalForage = typeof localforage;
 import { nanoid } from "nanoid";
 
-import type { SyncPlanType } from "../pro/src/sync";
 import type { Entity, SUPPORTED_SERVICES_TYPE } from "./baseTypes";
 import { unixTimeToStr } from "./misc";
+import type { SyncPlanType } from "./sync";
 
 const DB_VERSION_NUMBER_IN_HISTORY = [20211114, 20220108, 20220326, 20240220];
 export const DEFAULT_DB_VERSION_NUMBER: number = 20240220;
@@ -604,4 +604,49 @@ export const readAllProfilerResultsByVault = async (
   } else {
     return records.map((x) => x.val);
   }
+};
+
+export const upsertFileContentHistoryByVaultAndProfile = async (
+  db: InternalDBs,
+  vaultRandomID: string,
+  profileID: string,
+  prevSync: Entity,
+  prevContent: ArrayBuffer
+) => {
+  await db.fileContentHistoryTbl.setItem(
+    `${vaultRandomID}\t${profileID}\t${prevSync.key}`,
+    prevContent
+  );
+};
+
+export const getFileContentHistoryByVaultAndProfile = async (
+  db: InternalDBs,
+  vaultRandomID: string,
+  profileID: string,
+  prevSync: Entity
+) => {
+  return (await db.fileContentHistoryTbl.getItem(
+    `${vaultRandomID}\t${profileID}\t${prevSync.key}`
+  )) as ArrayBuffer | null | undefined;
+};
+
+export const clearFileContentHistoryByVaultAndProfile = async (
+  db: InternalDBs,
+  vaultRandomID: string,
+  profileID: string,
+  key: string
+) => {
+  await db.fileContentHistoryTbl.removeItem(
+    `${vaultRandomID}\t${profileID}\t${key}`
+  );
+};
+
+export const clearAllFileContentHistoryByVault = async (
+  db: InternalDBs,
+  vaultRandomID: string
+) => {
+  const keys = (await db.fileContentHistoryTbl.keys()).filter((x) =>
+    x.startsWith(`${vaultRandomID}\t`)
+  );
+  await db.fileContentHistoryTbl.removeItems(keys);
 };

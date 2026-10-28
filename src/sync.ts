@@ -11,21 +11,25 @@ import type {
   SUPPORTED_SERVICES_TYPE,
   SyncDirectionType,
   SyncTriggerSourceType,
-} from "../../src/baseTypes";
-import { copyFile, copyFileOrFolder, copyFolder } from "../../src/copyLogic";
-import type { FakeFs } from "../../src/fsAll";
-import type { FakeFsEncrypt } from "../../src/fsEncrypt";
+} from "./baseTypes";
+import { isMergable, mergeFile, tryDuplicateFile } from "./conflictLogic";
+import { copyFile, copyFileOrFolder, copyFolder } from "./copyLogic";
+import type { FakeFs } from "./fsAll";
+import type { FakeFsEncrypt } from "./fsEncrypt";
 import {
   type InternalDBs,
+  clearFileContentHistoryByVaultAndProfile,
   clearPrevSyncRecordByVaultAndProfile,
   getAllPrevSyncRecordsByVaultAndProfile,
+  getFileContentHistoryByVaultAndProfile,
   insertSyncPlanRecordByVault,
+  upsertFileContentHistoryByVaultAndProfile,
   upsertPrevSyncRecordByVaultAndProfile,
-} from "../../src/localdb";
+} from "./localdb";
 import {
   DEFAULT_FILE_NAME_FOR_METADATAONREMOTE,
   DEFAULT_FILE_NAME_FOR_METADATAONREMOTE2,
-} from "../../src/metadataOnRemote";
+} from "./metadataOnRemote";
 import {
   atWhichLevel,
   checkValidName,
@@ -35,15 +39,8 @@ import {
   isSpecialFolderNameToSkip,
   roughSizeOfObject,
   unixTimeToStr,
-} from "../../src/misc";
-import type { Profiler } from "../../src/profiler";
-import { checkProRunnableAndFixInplace } from "./account";
-import { isMergable, mergeFile, tryDuplicateFile } from "./conflictLogic";
-import {
-  clearFileContentHistoryByVaultAndProfile,
-  getFileContentHistoryByVaultAndProfile,
-  upsertFileContentHistoryByVaultAndProfile,
-} from "./localdb";
+} from "./misc";
+import type { Profiler } from "./profiler";
 
 const copyEntityAndFixTimeFormat = (
   src: Entity,
@@ -1937,10 +1934,6 @@ export async function syncer(
   let step = 0;
 
   try {
-    // check pro feature
-    // if anything goes wrong, it will throw
-    await checkProRunnableAndFixInplace(settings, pluginVersion, configSaver);
-
     // try mode?
     await notifyFunc?.(triggerSource, step);
 

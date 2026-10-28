@@ -1,22 +1,28 @@
 # Contributing
 
-## What
-
-Starting from April 29, 2024, all individual contributors' contributions are only possibly accepted after they sign the CLA.
-
-We do not accept corporate contributions at this moment.
-
-You can check out [CLA](./CLA.md).
+Contributions of any kind are welcome: bug reports, feature requests, documentation fixes, and pull requests.
 
 ## Steps
 
-1. Make some changes to the code. Open a pull request.
-2. A rebot will check the status.
-   ![robot check](./assets/cla-process/cla-robot-alert.png)
-3. Read the [CLA](./CLA.md) carefully and make a decision.
-4. If you decide to sign the CLA, please make a comment "I have read the CLA Document and I hereby sign the CLA".
-5. If you decide to not sign the CLA, please close the PR.
-6. The robot should recheck and pass the check automatically.
-   ![robot recheck](./assets/cla-process/cla-sign-and-pass.png)
-7. Your pr will be reviewed.
-8. If you sign the CLA and submit some more PRs, the robot should pass the test automatically.
+1. Open an issue or a discussion first for larger changes, so that the direction can be agreed on.
+2. Fork the repo, create a branch, and make your changes.
+3. Keep your changes focused: don't mix unrelated refactors with a bug fix.
+4. Make sure the code is formatted and the tests still pass:
+
+   ```bash
+   npm run format
+   npm run build
+   npm test
+   ```
+
+5. Open a pull request. Describe what problem it solves and how you tested it.
+6. Your PR will be reviewed. Please be patient, this is a spare-time project.
+
+## What we don't accept
+
+- Support for paid services and any PRO / subscription / account system. betterS3 only keeps the free services (S3-compatible storage, WebDAV, Dropbox, OneDrive, Webdis) and keeps all features free.
+- Changes that break end-to-end encryption compatibility with existing data.
+
+## License
+
+By contributing, you agree that your contributions are licensed under the [Apache License 2.0](./LICENSE), the same license as the rest of the project.

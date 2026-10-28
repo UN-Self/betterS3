@@ -3,16 +3,6 @@
  * To avoid circular dependency.
  */
 
-import type {
-  AzureBlobStorageConfig,
-  BoxConfig,
-  GoogleDriveConfig,
-  KoofrConfig,
-  OnedriveFullConfig,
-  PCloudConfig,
-  ProConfig,
-  YandexDiskConfig,
-} from "../pro/src/baseTypesPro";
 import type { LangTypeAndAuto } from "./i18n";
 
 declare global {
@@ -32,19 +22,18 @@ export type SUPPORTED_SERVICES_TYPE =
   | "webdav"
   | "dropbox"
   | "onedrive"
-  | "onedrivefull"
-  | "webdis"
-  | "googledrive"
-  | "box"
-  | "pcloud"
-  | "yandexdisk"
-  | "koofr"
-  | "azureblobstorage";
+  | "webdis";
 
 export type SUPPORTED_SERVICES_TYPE_WITH_REMOTE_BASE_DIR = Exclude<
   SUPPORTED_SERVICES_TYPE,
-  "s3" | "azureblobstorage"
+  "s3"
 >;
+
+/**
+ * The maximum file size which is allowed to be merged automatically
+ * when using the "smart conflict" action.
+ */
+export const MERGABLE_SIZE = 1000 * 1000; // 1 MB
 
 export interface S3Config {
   s3Endpoint: string;
@@ -150,14 +139,7 @@ export interface RemotelySavePluginSettings {
   webdav: WebdavConfig;
   dropbox: DropboxConfig;
   onedrive: OnedriveConfig;
-  onedrivefull: OnedriveFullConfig;
   webdis: WebdisConfig;
-  googledrive: GoogleDriveConfig;
-  box: BoxConfig;
-  pcloud: PCloudConfig;
-  yandexdisk: YandexDiskConfig;
-  koofr: KoofrConfig;
-  azureblobstorage: AzureBlobStorageConfig;
 
   password: string;
   serviceType: SUPPORTED_SERVICES_TYPE;
@@ -189,8 +171,6 @@ export interface RemotelySavePluginSettings {
   encryptionMethod?: CipherMethodType;
 
   profiler?: ProfilerConfig;
-
-  pro?: ProConfig;
 
   /**
    * @deprecated
